@@ -1,0 +1,30 @@
+﻿@page "/"
+@inject IJSRuntime JSRuntime
+
+<h3>文章レビュー</h3>
+
+<div>
+    <label>レビューする文章</label><br />
+    <textarea @bind="oldText" rows="5" cols="60"></textarea>
+</div>
+
+<div>
+    <label>レビューの観点</label><br />
+    <textarea @bind="tips" rows="5" cols="60"></textarea>
+</div>
+
+<div style="margin-top:10px;">
+    <button @onclick="ShowDiff">添削</button>
+</div>
+
+<div>
+    @comment
+</div>
+<div id="diffContainer" style="margin-top:20px; width: calc(100vw - 400px)"></div>
+@if (string.IsNullOrEmpty(modifiedText) is false)
+{
+
+    <!-- JSから生成された差分HTMLを表示するコンテナ -->
+
+    <button @onclick="CopyAsync">添削後の文章をコピー</button>
+}
