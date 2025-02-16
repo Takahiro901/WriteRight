@@ -27,6 +27,15 @@ namespace BlazorAppDiff.Components.Pages
         private string modifiedText = "";
         private ElementReference diffElement;
 
+        private bool isDisplayDiff = false;
+        private string displayString 
+        {
+            get
+            {
+                return isDisplayDiff ? "block" : "none";
+            }
+        }
+
         protected override void OnInitialized()
         {
             endpoint = Options.Value.AzureOpenAI.Endpoint;
@@ -39,12 +48,18 @@ namespace BlazorAppDiff.Components.Pages
         /// </summary>
         private async Task ShowDiff()
         {
+            //前回の結果を初期化
+            comment = "";
+            modifiedText = "";
+            isDisplayDiff = false;
+
             var test = await AskOpenAiAsync(oldText);
             if(string.IsNullOrEmpty(test.modifiedText) is false)
                 await JSRuntime.InvokeVoidAsync("renderDiff", oldText, test.modifiedText, diffElement);
             
             comment = test.comment;
             modifiedText = test.modifiedText;
+            isDisplayDiff = true;
             StateHasChanged();
         }
 

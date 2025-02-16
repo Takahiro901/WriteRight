@@ -17,6 +17,8 @@
     <button @onclick="ShowDiff">添削</button>
 </div>
 
+<hr/>
+
 <div>
     @comment
 </div>
@@ -27,4 +29,4 @@
     <button @onclick="CopyAsync">添削後の文章をコピー</button>
 }
 
-<div @ref="diffElement" style="margin-top:20px; width:calc(100vw - 100px);" />
+<div @ref="diffElement" style="margin-top:20px; width:calc(100vw - 100px); display: @displayString;" />
