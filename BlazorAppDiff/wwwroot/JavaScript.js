@@ -1,8 +1,7 @@
-﻿window.renderDiff = (oldText, newText) => {
+﻿window.renderDiff = (oldText, newText, targetElement) => {
     // Unified Diff形式の文字列を生成
-    var diff = Diff.createPatch("testtext", oldText, newText);
+    var diff = Diff.createPatch("diff", oldText, newText);
 
-    const targetElement = document.getElementById('diffContainer');
     const configuration = {
         drawFileList: false,
         matching: 'lines',

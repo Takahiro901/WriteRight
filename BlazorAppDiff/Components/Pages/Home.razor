@@ -20,11 +20,11 @@
 <div>
     @comment
 </div>
-<div id="diffContainer" style="margin-top:20px; width: calc(100vw - 400px)"></div>
+
 @if (string.IsNullOrEmpty(modifiedText) is false)
 {
-
     <!-- JSから生成された差分HTMLを表示するコンテナ -->
-
     <button @onclick="CopyAsync">添削後の文章をコピー</button>
 }
+
+<div @ref="diffElement" style="margin-top:20px; width:calc(100vw - 100px);" />

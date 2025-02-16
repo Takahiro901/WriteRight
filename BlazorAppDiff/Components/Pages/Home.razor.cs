@@ -25,6 +25,7 @@ namespace BlazorAppDiff.Components.Pages
 
         private string comment = "";
         private string modifiedText = "";
+        private ElementReference diffElement;
 
         protected override void OnInitialized()
         {
@@ -40,7 +41,7 @@ namespace BlazorAppDiff.Components.Pages
         {
             var test = await AskOpenAiAsync(oldText);
             if(string.IsNullOrEmpty(test.modifiedText) is false)
-                await JSRuntime.InvokeVoidAsync("renderDiff", oldText, test.modifiedText);
+                await JSRuntime.InvokeVoidAsync("renderDiff", oldText, test.modifiedText, diffElement);
             
             comment = test.comment;
             modifiedText = test.modifiedText;
