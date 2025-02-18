@@ -55,11 +55,10 @@ namespace BlazorAppDiff.Components.Pages
 
             var test = await AskOpenAiAsync(oldText);
             if(string.IsNullOrEmpty(test.modifiedText) is false)
-                await JSRuntime.InvokeVoidAsync("renderDiff", oldText, test.modifiedText, diffElement);
+                isDisplayDiff = await JSRuntime.InvokeAsync<bool>("renderDiff", oldText, test.modifiedText, diffElement);
             
             comment = test.comment;
             modifiedText = test.modifiedText;
-            isDisplayDiff = true;
             StateHasChanged();
         }
 

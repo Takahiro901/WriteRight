@@ -23,7 +23,7 @@
     @comment
 </div>
 
-@if (string.IsNullOrEmpty(modifiedText) is false)
+@if (isDisplayDiff)
 {
     <!-- JSから生成された差分HTMLを表示するコンテナ -->
     <button @onclick="CopyAsync">添削後の文章をコピー</button>
