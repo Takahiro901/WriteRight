@@ -104,7 +104,7 @@ namespace BlazorAppDiff.Components.Pages
             [Description("校正後のテキスト")]
             public string ModifiedText { get; set; } = modifiedText;
 
-            [Description("校正についての説明を必ず追加")]
+            [Description("校正についての説明")]
             public string Comment { get; set; } = comment;
         }
     }
