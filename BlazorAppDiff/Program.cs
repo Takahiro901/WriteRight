@@ -1,5 +1,6 @@
 using BlazorAppDiff.Components;
 using BlazorAppDiff.Options;
+using Microsoft.FluentUI.AspNetCore.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+builder.Services.AddFluentUIComponents();
 builder.Services.AddOptions<EnvironmentalVariables>()
     .Bind(builder.Configuration)
     .ValidateDataAnnotations()
