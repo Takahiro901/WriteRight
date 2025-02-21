@@ -26,10 +26,9 @@ namespace BlazorAppDiff.Components.Pages
         private ElementReference diffElement;
 
         [SupplyParameterFromForm]
-        private TextInput textInput { get; set; } = new();
+        private TextInput TextInput { get; set; } = new();
 
-        private bool isDisplayDiff = false;
-        private string displayString 
+        private string DisplayString
         {
             get
             {
@@ -54,8 +53,8 @@ namespace BlazorAppDiff.Components.Pages
             modifiedText = "";
             isDisplayDiff = false;
 
-            var oldText = textInput.OriginalText;
-            var tips = textInput.Hint;
+            var oldText = TextInput.OriginalText;
+            var tips = TextInput.Hint;
 
             var test = await AskOpenAiAsync(oldText, tips);
             if(string.IsNullOrEmpty(test.modifiedText) is false)

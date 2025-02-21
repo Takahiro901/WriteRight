@@ -3,18 +3,18 @@
 
 <h3>文章レビュー</h3>
 
-<EditForm Model="textInput" OnValidSubmit="ShowDiff">
+<EditForm Model="TextInput" OnValidSubmit="ShowDiff">
     <DataAnnotationsValidator />
     <div>
         <label>レビューする文章</label><br />
-        <InputTextArea @bind-Value="textInput.OriginalText" maxlength="1000" rows="5" cols="60"/>
-        <ValidationMessage For="() => textInput.OriginalText"/>
+        <InputTextArea @bind-Value="TextInput.OriginalText" maxlength="1000" rows="5" cols="60"/>
+        <ValidationMessage For="() => TextInput.OriginalText"/>
     </div>
 
     <div>
         <label>レビューの観点</label><br />
-        <InputTextArea @bind-Value="textInput.Hint" maxlength="1000" rows="5" cols="60" placeholder="例）誤字脱字チェックをお願いします。"/>
-        <ValidationMessage For="() => textInput.Hint" />
+        <InputTextArea @bind-Value="TextInput.Hint" maxlength="1000" rows="5" cols="60" placeholder="例）誤字脱字チェックをお願いします。"/>
+        <ValidationMessage For="() => TextInput.Hint" />
     </div>
     <div style="margin-top:10px;">
         <button type="submit">レビュー開始</button>
@@ -36,4 +36,4 @@
     <button @onclick="CopyAsync">添削後の文章をコピー</button>
 }
 
-<div @ref="diffElement" style="margin-top:20px; width:calc(100vw - 100px); display: @displayString;" />
+<div @ref="diffElement" style="margin-top:20px; width:calc(100vw - 100px); display: @DisplayString;" />
