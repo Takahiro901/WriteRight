@@ -26,6 +26,14 @@
 
 <hr/>
 
+@if(isWaiting)
+{
+    <div style="display: flex; align-items: center; justify-content: center;">
+        <FluentProgressRing></FluentProgressRing>
+    </div>
+}
+
+
 <div>
     @comment
 </div>
@@ -33,7 +41,7 @@
 @if (isDisplayDiff)
 {
     <!-- JSから生成された差分HTMLを表示するコンテナ -->
-    <button @onclick="CopyAsync">添削後の文章をコピー</button>
+    <button type="button" @onclick="CopyAsync">添削後の文章をコピー</button>
 }
 
 <div @ref="diffElement" style="margin-top:20px; width:calc(100vw - 100px); display: @DisplayString;" />

@@ -24,6 +24,8 @@ namespace BlazorAppDiff.Components.Pages
         private string comment = "";
         private string modifiedText = "";
         private ElementReference diffElement;
+        private bool isDisplayDiff = false;
+        private bool isWaiting = false;
 
         [SupplyParameterFromForm]
         private TextInput TextInput { get; set; } = new();
@@ -48,6 +50,7 @@ namespace BlazorAppDiff.Components.Pages
         /// </summary>
         private async Task ShowDiff()
         {
+            isWaiting = true;
             //前回の結果を初期化
             comment = "";
             modifiedText = "";
@@ -57,17 +60,18 @@ namespace BlazorAppDiff.Components.Pages
             var tips = TextInput.Hint;
 
             var test = await AskOpenAiAsync(oldText, tips);
-            if(string.IsNullOrEmpty(test.modifiedText) is false)
+            if (string.IsNullOrEmpty(test.modifiedText) is false)
                 isDisplayDiff = await JSRuntime.InvokeAsync<bool>("renderDiff", oldText, test.modifiedText, diffElement);
-            
+
             comment = test.comment;
             modifiedText = test.modifiedText;
             StateHasChanged();
+            isWaiting = false;
         }
 
         private async Task<(string modifiedText, string comment)> AskOpenAiAsync(string oldText, string tips)
         {
-            JSchemaGenerator generator = new JSchemaGenerator();
+            JSchemaGenerator generator = new();
             var jsonSchema = generator.Generate(typeof(CheckedResult)).ToString();
 
 
