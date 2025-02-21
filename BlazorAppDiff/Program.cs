@@ -1,5 +1,6 @@
 using BlazorAppDiff.Components;
 using BlazorAppDiff.Options;
+using BlazorAppDiff.Services;
 using Microsoft.FluentUI.AspNetCore.Components;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
-
+builder.Services.AddScoped<OpenAIService>();
 builder.Services.AddFluentUIComponents();
 builder.Services.AddOptions<EnvironmentalVariables>()
     .Bind(builder.Configuration)
