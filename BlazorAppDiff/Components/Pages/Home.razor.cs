@@ -1,4 +1,5 @@
 ﻿using Azure.AI.OpenAI;
+using BlazorAppDiff.Model;
 using BlazorAppDiff.Options;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Options;
@@ -20,12 +21,12 @@ namespace BlazorAppDiff.Components.Pages
         private string apikey = "";
         private string deployment = "";
 
-        private string oldText = "私はソフトウェアエンジニアです。";
-        private string tips = "誤字脱字チェックをお願いします。";
-
         private string comment = "";
         private string modifiedText = "";
         private ElementReference diffElement;
+
+        [SupplyParameterFromForm]
+        private TextInput textInput { get; set; } = new();
 
         private bool isDisplayDiff = false;
         private string displayString 
@@ -53,7 +54,10 @@ namespace BlazorAppDiff.Components.Pages
             modifiedText = "";
             isDisplayDiff = false;
 
-            var test = await AskOpenAiAsync(oldText);
+            var oldText = textInput.OriginalText;
+            var tips = textInput.Hint;
+
+            var test = await AskOpenAiAsync(oldText, tips);
             if(string.IsNullOrEmpty(test.modifiedText) is false)
                 isDisplayDiff = await JSRuntime.InvokeAsync<bool>("renderDiff", oldText, test.modifiedText, diffElement);
             
@@ -62,7 +66,7 @@ namespace BlazorAppDiff.Components.Pages
             StateHasChanged();
         }
 
-        private async Task<(string modifiedText, string comment)> AskOpenAiAsync(string oldText)
+        private async Task<(string modifiedText, string comment)> AskOpenAiAsync(string oldText, string tips)
         {
             JSchemaGenerator generator = new JSchemaGenerator();
             var jsonSchema = generator.Generate(typeof(CheckedResult)).ToString();
