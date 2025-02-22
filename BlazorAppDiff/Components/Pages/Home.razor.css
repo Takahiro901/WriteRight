@@ -1,0 +1,7 @@
+﻿.button-style {
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    border-radius: 100px;
+    background-color: transparent;
+    padding: 8px;
+    font-size: 13px;
+}

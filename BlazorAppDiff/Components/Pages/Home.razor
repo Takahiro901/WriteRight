@@ -6,7 +6,7 @@
     <DataAnnotationsValidator />
     <div>
         <label>レビューする文章</label><br />
-        <InputTextArea @bind-Value="TextInput.OriginalText" maxlength="1000" rows="5" cols="60"/>
+        <InputTextArea @bind-Value="TextInput.OriginalText" maxlength="1000" rows="5" cols="60" />
         <ValidationMessage For="() => TextInput.OriginalText"/>
     </div>
 
@@ -16,7 +16,7 @@
         <ValidationMessage For="() => TextInput.Hint" />
     </div>
     <div style="margin-top:10px;">
-        <button type="submit">レビュー開始</button>
+        <button type="submit" class="button-style">レビュー開始</button>
     </div>
 </EditForm>
 
@@ -40,7 +40,7 @@
 @if (isDisplayDiff)
 {
     <!-- JSから生成された差分HTMLを表示するコンテナ -->
-    <button type="button" @onclick="CopyAsync">添削後の文章をコピー</button>
+    <button type="button" style="margin-top:20px;" class="button-style" @onclick="CopyAsync">添削後の文章をコピー</button>
 }
 
 <div @ref="diffElement" style="margin-top:20px; width:calc(100vw - 100px); display: @DisplayString;" />
